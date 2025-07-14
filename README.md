@@ -1,70 +1,186 @@
-# Getting Started with Create React App
+# BPJS Chatbot: Asisten Virtual BPJS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![BPJS Chatbot Logo/Banner - Add your own image URL here if you have one](https://via.placeholder.com/150x50?text=BPJS+Chatbot)
 
-## Available Scripts
+Selamat datang di **BPJS Chatbot**! Proyek ini bertujuan untuk menyediakan asisten virtual yang interaktif dan informatif terkait layanan BPJS. Chatbot ini dirancang untuk menjawab pertanyaan umum, membantu pencarian informasi, dan memfasilitasi interaksi pengguna dengan data BPJS, baik melalui kueri database maupun dokumen Standar Operasional Prosedur (SOP).
 
-In the project directory, you can run:
+Proyek ini dibangun menggunakan **Create React App** untuk antarmuka pengguna (frontend) dan **Flask** (Python) untuk backend, dilengkapi dengan integrasi basis data MySQL dan pemanfaatan model bahasa besar (LLM) untuk pemrosesan bahasa alami.
 
-### `npm start`
+## Daftar Isi
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1.  [Fitur Utama](#fitur-utama)
+2.  [Teknologi Digunakan](#teknologi-digunakan)
+3.  [Panduan Memulai Proyek](#panduan-memulai-proyek)
+    * [Prasyarat](#prasyarat)
+    * [Instalasi](#instalasi)
+    * [Konfigurasi Database](#konfigurasi-database)
+    * [Menjalankan Aplikasi](#menjalankan-aplikasi)
+4.  [Struktur Proyek](#struktur-proyek)
+5.  [Script yang Tersedia](#script-yang-tersedia)
+6.  [Ejecting (Opsi Lanjutan)](#ejecting-opsi-lanjutan)
+7.  [Pelajari Lebih Lanjut](#pelajari-lebih-lanjut)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Fitur Utama
 
-### `npm test`
+* **Interaksi Chatbot Dinamis**: Menjawab pertanyaan pengguna secara real-time.
+* **Mode Kueri Database (SQL)**: Memungkinkan pencarian data spesifik (misalnya, data pengguna, keluhan, rujukan medis) dengan menerjemahkan pertanyaan bahasa alami ke dalam kueri SQL.
+* **Mode Dokumen SOP (PDF)**: Memberikan informasi relevan langsung dari dokumen prosedur BPJS yang diunggah.
+* **Manajemen Pengguna**: Sistem registrasi dan login dengan peran `pegawai` dan `admin`.
+* **Riwayat Chat**: Menyimpan dan menampilkan riwayat percakapan pengguna.
+* **Antarmuka Admin**: Admin dapat mengunggah dokumen PDF baru dan melihat riwayat chat semua pengguna.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Teknologi Digunakan
 
-### `npm run build`
+* **Frontend**:
+    * React (dengan Create React App)
+    * Tailwind CSS (untuk styling)
+    * Axios (untuk permintaan HTTP)
+    * React Router DOM (untuk navigasi)
+* **Backend (Flask - Python)**:
+    * Flask & Flask-CORS
+    * SQLAlchemy (untuk interaksi database MySQL)
+    * Langchain (untuk orkestrasi LLM)
+    * ChatGroq (LLM untuk kueri SQL)
+    * OpenRouter API (untuk LLM pada dokumen PDF, menggunakan model `deepseek/deepseek-r1-0528:free`)
+    * PyPDFLoader (untuk memuat dokumen PDF)
+    * HuggingFaceEmbeddings (untuk embedding teks)
+    * werkzeug.security (untuk hashing password)
+* **Database**:
+    * MySQL
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Panduan Memulai Proyek
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ikuti langkah-langkah di bawah ini untuk menjalankan proyek secara lokal.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prasyarat
 
-### `npm run eject`
+Pastikan Anda telah menginstal yang berikut ini:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* Node.js (versi LTS direkomendasikan)
+* Python 3.8+
+* MySQL Server
+* `npm` atau `yarn`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Instalasi
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1.  **Clone repositori:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    ```bash
+    git clone [https://github.com/fayydhr/kp_bpjs.git](https://github.com/fayydhr/kp_bpjs.git)
+    cd kp_bpjs/KP_bpjs-14888cc3a797d72a5e3803ce1e3a27c76933cffd
+    ```
 
-## Learn More
+2.  **Instal dependensi frontend:**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    ```bash
+    npm install
+    # atau
+    yarn install
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3.  **Instal dependensi backend:**
 
-### Code Splitting
+    ```bash
+    pip install -r requirements.txt # Pastikan ada file requirements.txt di direktori backend Anda
+    ```
+    Jika `requirements.txt` tidak ada, buat secara manual dengan isi berikut:
+    ```
+    Flask
+    Flask-Cors
+    SQLAlchemy
+    langchain-community
+    langchain-groq
+    langchain-core
+    langchain-huggingface
+    python-dotenv
+    PyMySQL
+    openai
+    werkzeug
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Konfigurasi Database
 
-### Analyzing the Bundle Size
+1.  **Buat database MySQL:**
+    Buat database baru bernama `bpjs_db`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    ```sql
+    CREATE DATABASE bpjs_db;
+    ```
 
-### Making a Progressive Web App
+2.  **Buat tabel:**
+    Jalankan skrip SQL berikut di database `bpjs_db` Anda untuk membuat tabel yang diperlukan:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    ```sql
+    -- Tabel userss (untuk pengguna aplikasi)
+    CREATE TABLE userss (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(255) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL,
+        role ENUM('pegawai', 'admin') DEFAULT 'pegawai'
+    );
 
-### Advanced Configuration
+    -- Tabel history (untuk riwayat chat)
+    CREATE TABLE history (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user VARCHAR(255) NOT NULL,
+        bot TEXT NOT NULL,
+        user_question TEXT,
+        conversation_id VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    -- Contoh tabel untuk kueri SQL (sesuaikan dengan kebutuhan Anda)
+    -- Tabel users
+    CREATE TABLE users (
+        nik VARCHAR(16) PRIMARY KEY,
+        nama VARCHAR(255),
+        alamat TEXT,
+        status_bpjs VARCHAR(50)
+    );
 
-### Deployment
+    -- Tabel keluhan_masyarakat
+    CREATE TABLE keluhan_masyarakat (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        topik VARCHAR(255),
+        deskripsi TEXT,
+        kategori VARCHAR(100),
+        status VARCHAR(50)
+    );
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    -- Tabel rujukan_medis
+    CREATE TABLE rujukan_medis (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nama_pasien VARCHAR(255),
+        rumah_sakit VARCHAR(255),
+        saran_spesialis VARCHAR(255)
+    );
+    ```
 
-### `npm run build` fails to minify
+3.  **Variabel Lingkungan (.env):**
+    Buat file `.env` di direktori root backend (`app.py`) dan tambahkan kunci API OpenRouter Anda:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    ```
+    OPENROUTER_API_KEY=your_openrouter_api_key_here
+    ```
+
+### Menjalankan Aplikasi
+
+1.  **Jalankan backend Flask:**
+    Buka terminal baru di direktori root proyek (`kp_bpjs-14888cc3a797d72a5e3803ce1e3a27c76933cffd`) dan jalankan:
+
+    ```bash
+    python app.py
+    ```
+    Server backend akan berjalan di `http://localhost:5000`.
+
+2.  **Jalankan frontend React:**
+    Buka terminal baru di direktori yang sama dan jalankan:
+
+    ```bash
+    npm start
+    # atau
+    yarn start
+    ```
+    Aplikasi React akan terbuka di browser Anda secara otomatis di [http://localhost:3000](http://localhost:3000).
+
+## Struktur Proyek
