@@ -1,6 +1,5 @@
 # BPJS Chatbot: Asisten Virtual BPJS
 
-![BPJS Chatbot Logo/Banner - Add your own image URL here if you have one](https://via.placeholder.com/150x50?text=BPJS+Chatbot)
 
 Selamat datang di **BPJS Chatbot**! Proyek ini bertujuan untuk menyediakan asisten virtual yang interaktif dan informatif terkait layanan BPJS. Chatbot ini dirancang untuk menjawab pertanyaan umum, membantu pencarian informasi, dan memfasilitasi interaksi pengguna dengan data BPJS, baik melalui kueri database maupun dokumen Standar Operasional Prosedur (SOP).
 
